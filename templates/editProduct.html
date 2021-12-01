@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+    <div class="card h-100 h-auto">{#   style="height: 92vh !important; background-color: #0d4a79">#}
+        <div class="card-body">
+            <div class="row">
+                <div class="col-lg-12">
+
+                    <div class="card col-6 m-auto">
+                        <h3 class="card-header ">Product {{ product.productSku }}</h3>
+                        <div class="card-body">
+                            <div >
+                                <form method="post">
+                                    {% csrf_token %}
+                                    <label for="productSku"> Product SKU</label>
+                                    <input class="form-control" type="text" name="productSku"
+                                           value="{{ product.productSku }}" hidden/>
+
+                                    <label for="productDescription">Product Description</label>
+                                    <input class="form-control" type="text" name="productDescription"
+                                           value="{{ product.productDescription }}"/>
+
+                                    <label for="quantity">Quantity</label>
+                                    <input class="form-control" type="number" name="quantity"
+                                           value="{{ product.quantity }}"/>
+
+                                    <label for="location">Location</label>
+                                    <input class="form-control" type="text" name="location"
+                                           value="{{ product.location }}"/>
+                                    <br>
+                                    <input type="submit" class="btn form-control btn-outline-primary" value="Update Product"/>
+                                </form>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
