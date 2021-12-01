@@ -8,7 +8,7 @@ from django.http import HttpResponseRedirect
 from django.urls import reverse
 
 from main.forms import NewUserForm
-from main.models import Product
+from main.models import Product, Transaction
 
 
 def index(request):
@@ -78,6 +78,8 @@ def useProduct(request):
         product = Product.objects.get(productSku__iexact=productSku)
         withDrawalQuantity = request.POST["quantity"]
         if int(product.quantity) > int(withDrawalQuantity):
+            transaction = Transaction.objects.create(product=product, quantityUsed=withDrawalQuantity)
+            transaction.save()
             product.quantity = str(int(product.quantity) - int(withDrawalQuantity))
             product.save()
             if int(product.quantity) < 10:
