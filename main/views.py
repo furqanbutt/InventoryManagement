@@ -56,7 +56,7 @@ def addProduct(request):
         productDescription = request.POST["productDescription"]
         quantity = request.POST["quantity"]
         location = request.POST["location"]
-        image = request.POST["image"]
+        image = request.FILES.get("image")
         print(request.FILES.get("image"))
         print(request.POST.get("image"))
         Product.objects.create(productSku=productSku, productDescription=productDescription,
