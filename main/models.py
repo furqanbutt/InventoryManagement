@@ -24,6 +24,5 @@ class Transaction(models.Model):
     quantityUsed = models.IntegerField()
     dateUsed = models.DateTimeField(default=now())
 
-
     def __str__(self):
         return "[%s] %s items used at [%s]." % (self.product.productSku, self.quantityUsed, self.dateUsed.__str__())

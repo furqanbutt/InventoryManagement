@@ -44,99 +44,120 @@
 {#        <div class="lds-pos"></div>#}
 {#    </div>#}
 {#</div>#}
-{#<div id="main-wrapper" data-layout="vertical" data-navbarbg="skin5" data-sidebartype="full"#}
-{#     data-sidebar-position="absolute" data-header-position="absolute" data-boxed-layout="full">#}
-<!-- ============================================================== -->
-<!-- Topbar header - style you can find in pages.scss -->
-<!-- ============================================================== -->
-<header class="topbar" data-navbarbg="skin6">
-    <nav class="navbar top-navbar navbar-expand-md navbar-light">
-        <div class="navbar-header" data-logobg="skin6">
-            <!-- ============================================================== -->
-            <!-- Logo -->
-            <!-- ============================================================== -->
-            <a class="navbar-brand" href="{% url 'index' %}">
-                <!-- Logo icon -->
-                <b class="logo-icon">
-                    <!--You can put here icon as well // <i class="wi wi-sunset"></i> //-->
-                    <!-- Dark Logo icon -->
-                    {#                        <img src="{% static 'images/logo-icon.png' %}" alt="homepage" class="dark-logo"/>#}
-                    {#                        <!-- Light Logo icon -->#}
-                    {#                        <img src="{% static 'images/logo-light-icon.png' %}" alt="homepage" class="light-logo"/>#}
-                </b>
-                <!--End Logo icon -->
-                <!-- Logo text -->
-                {#                    <span class="logo-text">#}
-                {#                            <!-- dark Logo text -->#}
-                {#                            <img src="{% static 'images/logo-text.png' %}" alt="homepage" class="dark-logo"/>#}
-                {#                        <!-- Light Logo text -->#}
-                {#                            <img src="{% static 'images/logo-light-text.png' %}" class="light-logo" alt="homepage"/>#}
-                {#                        </span>#}
-            </a>
+<div id="main-wrapper" data-layout="vertical" data-navbarbg="skin5" data-sidebartype="full"
+     data-sidebar-position="absolute" data-header-position="absolute" data-boxed-layout="full"
+>
+    <!-- ============================================================== -->
+    <!-- Topbar header - style you can find in pages.scss -->
+    <!-- ============================================================== -->
+    <header class="topbar" data-navbarbg="skin6">
+        <nav class="navbar top-navbar navbar-expand-md navbar-light">
+            <div class="navbar-header" data-logobg="skin6">
+                <!-- ============================================================== -->
+                <!-- Logo -->
+                <!-- ============================================================== -->
+                <a class="navbar-brand" href="{% url 'index' %}">
+                    <!-- Logo icon -->
+                    <b class="logo-icon">
+                        <!--You can put here icon as well // <i class="wi wi-sunset"></i> //-->
+                        <!-- Dark Logo icon -->
+                        {#                        <img src="{% static 'images/logo-icon.png' %}" alt="homepage" class="dark-logo"/>#}
+                        {#                        <!-- Light Logo icon -->#}
+                        {#                        <img src="{% static 'images/logo-light-icon.png' %}" alt="homepage" class="light-logo"/>#}
+                    </b>
+                    <!--End Logo icon -->
+                    <!-- Logo text -->
+                    {#                    <span class="logo-text">#}
+                    {#                            <!-- dark Logo text -->#}
+                    {#                            <img src="{% static 'images/logo-text.png' %}" alt="homepage" class="dark-logo"/>#}
+                    {#                        <!-- Light Logo text -->#}
+                    {#                            <img src="{% static 'images/logo-light-text.png' %}" class="light-logo" alt="homepage"/>#}
+                    {#                        </span>#}
+                </a>
+                <!-- ============================================================== -->
+                <!-- End Logo -->
+                <!-- ============================================================== -->
+                <!-- This is for the sidebar toggle which is visible on mobile only -->
+                <a class="nav-toggler waves-effect waves-light d-block d-md-none" href="javascript:void(0)"><i
+                        class="mdi mdi-menu"></i>
+                </a>
+            </div>
             <!-- ============================================================== -->
             <!-- End Logo -->
             <!-- ============================================================== -->
-            <!-- This is for the sidebar toggle which is visible on mobile only -->
-            <a class="nav-toggler waves-effect waves-light d-block d-md-none" href="javascript:void(0)"><i
-                    class="mdi mdi-menu"></i>
-            </a>
+            <div class="navbar-collapse collapse" id="navbarSupportedContent" data-navbarbg="skin5">
+                <!-- ============================================================== -->
+                <!-- toggle and nav items -->
+                <!-- ============================================================== -->
+                <ul class="navbar-nav float-start me-auto">
+                    <!-- ============================================================== -->
+                    <!-- Search -->
+                    <!-- ============================================================== -->
+                    {#                    <li class="nav-item search-box"><a class="nav-link waves-effect waves-dark"#}
+                    {#                                                       href="javascript:void(0)"><i class="mdi mdi-magnify me-1"></i>#}
+                    {#                        <span class="font-16">Search</span></a>#}
+                    {#                        <form class="app-search position-absolute">#}
+                    {#                            <input type="text" class="form-control" placeholder="Search &amp; enter"> <a#}
+                    {#                                class="srh-btn"><i class="mdi mdi-window-close"></i></a>#}
+                    {#                        </form>#}
+                    {#                    </li>#}
+                </ul>
+                <!-- ============================================================== -->
+                <!-- Right side toggle and nav items -->
+                <!-- ============================================================== -->
+                <ul class="navbar-nav float-end">
+                    <!-- ============================================================== -->
+                    <!-- User profile and search -->
+                    <!-- ============================================================== -->
+                    {% if user.is_authenticated %}
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="/logout">Logout</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Welcome, {{ user.username }}</a>
+                        </li>
+
+                    {% else %}
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="/login">Login</a>
+                        </li>
+
+                    {% endif %}
+
+
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <!-- ============================================================== -->
+    <!-- End Topbar header -->
+    <!-- ============================================================== -->
+    <aside class="left-sidebar" data-sidebarbg="skin6">
+        <!-- Sidebar scroll-->
+        <div class="scroll-sidebar">
+            <!-- Sidebar navigation-->
+            <nav class="sidebar-nav">
+                <ul id="sidebarnav">
+                    <li class="sidebar-item"><a class="sidebar-link waves-effect waves-dark sidebar-link"
+                                                href="{% url 'dashboard' %}" aria-expanded="false"><i
+                            class="mdi mdi-view-dashboard"></i><span
+                            class="hide-menu">Dashboard</span></a></li>
+                    <li class="sidebar-item"><a class="sidebar-link waves-effect waves-dark sidebar-link"
+                                                href="{% url 'useProduct' %}" aria-expanded="false"><i
+                            class="mdi mdi-check-circle-outline"></i><span class="hide-menu">Use Product</span></a></li>
+                </ul>
+            </nav>
         </div>
-        <!-- ============================================================== -->
-        <!-- End Logo -->
-        <!-- ============================================================== -->
-        <div class="navbar-collapse collapse" id="navbarSupportedContent" data-navbarbg="skin5">
-            <!-- ============================================================== -->
-            <!-- toggle and nav items -->
-            <!-- ============================================================== -->
-            <ul class="navbar-nav float-start me-auto">
-                <!-- ============================================================== -->
-                <!-- Search -->
-                <!-- ============================================================== -->
-                {#                    <li class="nav-item search-box"><a class="nav-link waves-effect waves-dark"#}
-                {#                                                       href="javascript:void(0)"><i class="mdi mdi-magnify me-1"></i>#}
-                {#                        <span class="font-16">Search</span></a>#}
-                {#                        <form class="app-search position-absolute">#}
-                {#                            <input type="text" class="form-control" placeholder="Search &amp; enter"> <a#}
-                {#                                class="srh-btn"><i class="mdi mdi-window-close"></i></a>#}
-                {#                        </form>#}
-                {#                    </li>#}
-            </ul>
-            <!-- ============================================================== -->
-            <!-- Right side toggle and nav items -->
-            <!-- ============================================================== -->
-            <ul class="navbar-nav float-end">
-                <!-- ============================================================== -->
-                <!-- User profile and search -->
-                <!-- ============================================================== -->
-                {% if user.is_authenticated %}
-
-                    <li class="nav-item">
-                        <a class="nav-link" href="/logout">Logout</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Welcome, {{ user.username }}</a>
-                    </li>
-
-                {% else %}
-
-                    <li class="nav-item">
-                        <a class="nav-link" href="/login">Login</a>
-                    </li>
-
-                {% endif %}
-
-
-            </ul>
-        </div>
-    </nav>
-</header>
-<!-- ============================================================== -->
-<!-- End Topbar header -->
-<!-- ============================================================== -->
-
-{% block content %}
-{% endblock %}
+    </aside>
+    <div class="page-wrapper">
+        {% block content %}
+        {% endblock %}
+    </div>
 </div>
+
+
 {#<script src="{% static 'jquery/dist/jquery.min.js' %}"></script>#}
 <!-- Bootstrap tether Core JavaScript -->
 <script src="{% static 'bootstrap/dist/js/bootstrap.bundle.min.js' %}"></script>

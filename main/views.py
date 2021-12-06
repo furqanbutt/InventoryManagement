@@ -101,6 +101,14 @@ def useProduct(request):
     return render(request, "useProduct.html", {"products": products})
 
 
+def dashboard(request):
+    top5ProductsUsedLastWeek = Transaction.objects.all().order_by("-dateUsed")[:2]
+
+    print(top5ProductsUsedLastWeek)
+    transactions = Transaction.objects.all().order_by("-dateUsed")
+    return render(request, "dashboard.html", {"transactions": transactions})
+
+
 def register_request(request):
     if request.user.is_authenticated:
         return redirect("/")

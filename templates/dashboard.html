@@ -1,0 +1,152 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+    <div class="card h-auto">{#   style="height: 92vh !important; background-color: #0d4a79">#}
+        <div class="card-body">
+            <div class="row">
+
+                <div class="col-lg-3 col-sm-12">
+                    <div class="card border-primary">
+                        <div class="card-body ">
+                            {#                            <h4 class="card-title">Weekly Stats</h4>#}
+                            {#                            <h6 class="card-subtitle">Average sales</h6>#}
+                            <div class=" pb-3 d-flex align-items-center">
+                                {#                                    <span class="btn btn-primary btn-circle d-flex align-items-center">#}
+                                {#                                        <i class="mdi mdi-cart-outline fs-4"></i>#}
+                                {#                                    </span>#}
+                                <div class="ms-3">
+                                    <h5 class="mb-0 fw-bold">Products Used last week</h5>
+                                    <span class="text-muted fs-4">120</span>
+                                </div>
+                                {#                                <div class="ms-auto">#}
+                                {#                                    <span class="badge bg-light text-muted">+68%</span>#}
+                                {#                                </div>#}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-sm-12">
+                    <div class="card border-primary">
+                        <div class="card-body">
+                            {#                            <h4 class="card-title">Weekly Stats</h4>#}
+                            {#                            <h6 class="card-subtitle">Average sales</h6>#}
+                            <div class="pb-3 d-flex align-items-center">
+                                {#                                    <span class="btn btn-primary btn-circle d-flex align-items-center">#}
+                                {#                                        <i class="mdi mdi-cart-outline fs-4"></i>#}
+                                {#                                    </span>#}
+                                <div class="ms-3">
+                                    <h5 class="mb-0 fw-bold">Average Products used daily</h5>
+                                    <span class="text-muted fs-4">6</span>
+                                </div>
+                                {#                                <div class="ms-auto">#}
+                                {#                                    <span class="badge bg-light text-muted">+68%</span>#}
+                                {#                                </div>#}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-sm-12">
+                    <div class="card border-primary">
+                        <div class="card-body">
+                            {#                            <h4 class="card-title">Weekly Stats</h4>#}
+                            {#                            <h6 class="card-subtitle">Average sales</h6>#}
+                            <div class=" pb-3 d-flex align-items-center">
+                                {#                                    <span class="btn btn-primary btn-circle d-flex align-items-center">#}
+                                {#                                        <i class="mdi mdi-cart-outline fs-4"></i>#}
+                                {#                                    </span>#}
+                                <div class="ms-3">
+                                    <h5 class="mb-0 fw-bold">Average products Monthly</h5>
+                                    <span class="text-muted fs-4">180</span>
+                                </div>
+                                {#                                <div class="ms-auto">#}
+                                {#                                    <span class="badge bg-light text-muted">+68%</span>#}
+                                {#                                </div>#}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-sm-12">
+                    <div class="card border-primary">
+                        <div class="card-body">
+                            {#                            <h4 class="card-title">Weekly Stats</h4>#}
+                            {#                            <h6 class="card-subtitle">Average sales</h6>#}
+                            <div class="pb-3 d-flex align-items-center">
+                                {#                                    <span class="btn btn-primary btn-circle d-flex align-items-center">#}
+                                {#                                        <i class="mdi mdi-cart-outline fs-4"></i>#}
+                                {#                                    </span>#}
+                                <div class="ms-3">
+                                    <h5 class="mb-0 fw-bold">Total Products Used</h5>
+                                    <span class="text-muted fs-4">2090</span>
+                                </div>
+                                {#                                <div class="ms-auto">#}
+                                {#                                    <span class="badge bg-light text-muted">+68%</span>#}
+                                {#                                </div>#}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="card border-primary">
+                        <div class="card-body">
+                            <div class="d-md-flex align-items-center">
+                                <div>
+                                    <h4 class="card-title">Usage Summary</h4>
+                                    <h6 class="card-subtitle">Usage of top 5 products</h6>
+                                </div>
+                                <div class="ms-auto d-flex no-block align-items-center">
+                                    <ul class="list-inline dl d-flex align-items-center m-r-15 m-b-0">
+                                        {#                                    <li class="list-inline-item d-flex align-items-center text-info"><i#}
+                                        {#                                            class="fa fa-circle font-10 me-1"></i> Ample#}
+                                        {#                                    </li>#}
+                                        {#                                    <li class="list-inline-item d-flex align-items-center text-primary"><i#}
+                                        {#                                            class="fa fa-circle font-10 me-1"></i> Pixel#}
+                                        {#                                    </li>#}
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="amp-pxl mt-2" style="height: 37vh;">
+                                <div class="chartist-tooltip"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card border-primary">
+                        <h3 class="card-header ">Transactions</h3>
+                        <div class="card-body overflow-scroll">
+                            <div>
+                                <br>
+                                <br>
+                                <table class="table" id="dtBasicExample">
+                                    <thead>
+                                    <th>Product SKU</th>
+                                    <th>Product Description</th>
+                                    <th>Quantity Used</th>
+                                    <th>Date</th>
+                                    </thead>
+                                    <tbody>
+                                    {% for transaction in transactions %}
+                                        <tr>
+                                            <td>{{ transaction.product.productSku }}</td>
+                                            <td>{{ transaction.product.productDescription }}</td>
+                                            <td>{{ transaction.quantityUsed }}</td>
+                                            <td>{{ transaction.dateUsed }}</td>
+                                            {#                                                <td>#}
+                                            {#                                                    <a href="{% url 'editProduct' %}?productId={{ product.productSku }}"><i#}
+                                            {#                                                            class="font-20 mdi mdi-pencil-box-outline"></i></a>#}
+                                            {#                                                <a class="btn btn-sm btn-outline-primary" href="{% url 'useProduct' %}?productId={{ product.productSku }}" >Withdraw</a>#}
+                                            {#                                                </td>#}
+                                        </tr>
+                                    {% endfor %}
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
