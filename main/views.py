@@ -105,7 +105,7 @@ def dashboard(request):
     top5ProductsUsedLastWeek = Transaction.objects.all().order_by("-dateUsed")[:2]
 
     print(top5ProductsUsedLastWeek)
-    transactions = Transaction.objects.all().order_by("-dateUsed")
+    transactions = Transaction.objects.all().order_by("-dateUsed")[:10]
     return render(request, "dashboard.html", {"transactions": transactions})
 
 
