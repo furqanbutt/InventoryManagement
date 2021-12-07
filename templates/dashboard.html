@@ -1,6 +1,11 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
+    <style>
+    .ct-chart .ct-bar {
+    stroke-width: 4vw;
+}
+    </style>
     <div class="card h-auto">{#   style="height: 92vh !important; background-color: #0d4a79">#}
         <div class="card-body">
             <div class="row">
@@ -15,8 +20,8 @@
                                 {#                                        <i class="mdi mdi-cart-outline fs-4"></i>#}
                                 {#                                    </span>#}
                                 <div class="ms-3">
-                                    <h5 class="mb-0 fw-bold">Products Used last week</h5>
-                                    <span class="text-muted fs-4">120</span>
+                                    <h5 class="mb-0 fw-bold">Average Products used daily (30 Days)</h5>
+                                    <span class="text-muted fs-4">{{ averageProductsUsedLast30Days }}</span>
                                 </div>
                                 {#                                <div class="ms-auto">#}
                                 {#                                    <span class="badge bg-light text-muted">+68%</span>#}
@@ -34,9 +39,10 @@
                                 {#                                    <span class="btn btn-primary btn-circle d-flex align-items-center">#}
                                 {#                                        <i class="mdi mdi-cart-outline fs-4"></i>#}
                                 {#                                    </span>#}
+
                                 <div class="ms-3">
-                                    <h5 class="mb-0 fw-bold">Average Products used daily</h5>
-                                    <span class="text-muted fs-4">6</span>
+                                    <h5 class="mb-0 fw-bold">Products Used last 7 Days</h5>
+                                    <span class="text-muted fs-4">{{ productsUsedLast7Days }}</span>
                                 </div>
                                 {#                                <div class="ms-auto">#}
                                 {#                                    <span class="badge bg-light text-muted">+68%</span>#}
@@ -55,8 +61,8 @@
                                 {#                                        <i class="mdi mdi-cart-outline fs-4"></i>#}
                                 {#                                    </span>#}
                                 <div class="ms-3">
-                                    <h5 class="mb-0 fw-bold">Average products Monthly</h5>
-                                    <span class="text-muted fs-4">180</span>
+                                    <h5 class="mb-0 fw-bold">Products used last 30 Days</h5>
+                                    <span class="text-muted fs-4">{{ productsUsedLast30Days }}</span>
                                 </div>
                                 {#                                <div class="ms-auto">#}
                                 {#                                    <span class="badge bg-light text-muted">+68%</span>#}
@@ -76,7 +82,7 @@
                                 {#                                    </span>#}
                                 <div class="ms-3">
                                     <h5 class="mb-0 fw-bold">Total Products Used</h5>
-                                    <span class="text-muted fs-4">2090</span>
+                                    <span class="text-muted fs-4">{{ totalProductsUsed }}</span>
                                 </div>
                                 {#                                <div class="ms-auto">#}
                                 {#                                    <span class="badge bg-light text-muted">+68%</span>#}
@@ -88,12 +94,12 @@
             </div>
             <div class="row">
                 <div class="col-lg-12">
-                    <div class="card border-primary">
-                        <div class="card-body">
+                    <div class="card shadow border-primary" style="height: 30%!important;">
+                        <div class="card-body   ">
                             <div class="d-md-flex align-items-center">
                                 <div>
                                     <h4 class="card-title">Usage Summary</h4>
-                                    <h6 class="card-subtitle">Usage of top 5 products</h6>
+                                    <h6 class="card-subtitle">Usage of top products</h6>
                                 </div>
                                 <div class="ms-auto d-flex no-block align-items-center">
                                     <ul class="list-inline dl d-flex align-items-center m-r-15 m-b-0">
@@ -106,14 +112,14 @@
                                     </ul>
                                 </div>
                             </div>
-                            <div class="amp-pxl mt-2" style="height: 37vh;">
-                                <div class="chartist-tooltip"></div>
+                            <div class="ct-chart "  >
+
                             </div>
                         </div>
                     </div>
-                    <div class="card border-primary">
+                    <div class="card shadow border-primary">
                         <h3 class="card-header ">Transactions</h3>
-                        <div class="card-body">
+                        <div class="card-body overflow-scroll">
                             <div>
                                 <br>
                                 <br>
@@ -148,5 +154,42 @@
             </div>
         </div>
     </div>
+    <script>
+        $(document).ready(function () {
+            $('#dtBasicExample').DataTable({"bSort": false});
+            $('.dataTables_length').addClass('bs-select');
+
+            /*
+    Template Name: Admin Pro Admin
+    Author: Wrappixel
+    Email: niravjoshi87@gmail.com
+    File: js
+    */
+            new Chartist.Bar('.ct-chart', {
+                labels: [
+                    {% for label in graphList %}
+                        '{{ label.1 }}',
+                    {% endfor %}
+                ],
+                series: [
+                    [
+                         {% for label in graphList %}
+                        '{{ label.0 }}',
+                    {% endfor %}
+                    ]
+                ]
+            }, {
+                seriesBarDistance: 1,
+                reverseData: true,
+
+
+            });
+        });
+
+    </script>
+
+    <script>
+
+    </script>
 
 {% endblock %}

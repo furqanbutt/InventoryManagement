@@ -1,5 +1,9 @@
+import datetime
+
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.forms import AuthenticationForm
+from django.db import connection
+from django.db.models import Sum
 from django.shortcuts import render, redirect
 from django.core.mail import send_mail
 
@@ -102,11 +106,42 @@ def useProduct(request):
 
 
 def dashboard(request):
-    top5ProductsUsedLastWeek = Transaction.objects.all().order_by("-dateUsed")[:2]
+    if not request.user.is_authenticated:
+        print("user not authenticated")
+        return HttpResponseRedirect(reverse("login"))
+    totalProductsUsed = Transaction.objects.all().aggregate(Sum("quantityUsed"))["quantityUsed__sum"]
+    productsUsedLast30Days = \
+        Transaction.objects.filter(dateUsed__gt=datetime.datetime.today() - datetime.timedelta(days=30)).aggregate(
+            Sum("quantityUsed"))["quantityUsed__sum"]
+    averageProductsUsedLast30Days = round(productsUsedLast30Days / 30)
 
-    print(top5ProductsUsedLastWeek)
-    transactions = Transaction.objects.all().order_by("-dateUsed")[:10]
-    return render(request, "dashboard.html", {"transactions": transactions})
+    productsUsedLast7Days = \
+        Transaction.objects.filter(dateUsed__gt=datetime.datetime.today() - datetime.timedelta(days=7)).aggregate(
+            Sum("quantityUsed"))["quantityUsed__sum"]
+
+    transactions = Transaction.objects.all().order_by("-dateUsed")
+    with connection.cursor() as cursor:
+        graphList = list(cursor.execute("""select sum(main_transaction.quantityUsed) as totalUsed,productSku
+        from main_transaction inner
+        join
+        main_product
+        mp
+        on
+        mp.id = main_transaction.product_id
+        group
+        by
+        main_transaction.product_id
+        order
+        by
+        totalUsed
+        DESC;
+    
+        """))
+    return render(request, "dashboard.html",
+                  {"transactions": transactions, "averageProductsUsedLast30Days": averageProductsUsedLast30Days,
+                   "productsUsedLast7Days": productsUsedLast7Days, "productsUsedLast30Days": productsUsedLast30Days,
+                   "totalProductsUsed": totalProductsUsed,
+                   "graphList": graphList})
 
 
 def register_request(request):
