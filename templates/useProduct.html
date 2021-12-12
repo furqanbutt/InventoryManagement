@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
+    <script src="https://unpkg.com/html5-qrcode" type="text/javascript"></script>
     <style>
         .autocomplete-items {
             position: absolute;
@@ -46,6 +47,9 @@
                     <div class="card col-lg-6 col-sm-12 m-auto border-primary shadow">
                         <h3 class="card-header ">Update Used Product {{ product.productSku }}</h3>
                         <div class="card-body">
+                            <center>
+                                <div id="qr-reader" style="width: 300px"></div>
+                            </center>
                             <div>
                                 <div class="mx-auto mt-2 mb-2">
                                     {% if msg %}
@@ -94,6 +98,10 @@
                                         <input class="form-control" type="number" name="quantity"
                                                max="{{ product.quantity }}"/>
 
+                                        <label for="typeOfUse">Type</label>
+                                        <input class="form-control" type="text" name="typeOfUse"
+                                               value="Job" readonly/>
+
 
                                         <br>
                                         <input type="submit" class="btn form-control btn-outline-primary"
@@ -110,6 +118,18 @@
     </div>
 
     <script>
+
+        var html5QrcodeScanner = new Html5QrcodeScanner(
+            "qr-reader", {fps: 10, qrbox: 200});
+        html5QrcodeScanner.render(onScanSuccess);
+
+        function onScanSuccess(decodedText, decodedResult) {
+            console.log(`Code scanned = ${decodedText}`, decodedResult);
+            document.getElementById("searchInput").value = decodedText;
+            html5QrcodeScanner.clear();
+        }
+
+
         function autocomplete(inp, arr) {
             /*the autocomplete function takes two arguments,
             the text field element and an array of possible autocompleted values:*/

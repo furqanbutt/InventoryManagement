@@ -121,7 +121,7 @@ def dashboard(request):
 
     transactions = Transaction.objects.all().order_by("-dateUsed")
     with connection.cursor() as cursor:
-        graphList = list(cursor.execute("""select sum(main_transaction.quantityUsed) as totalUsed,productSku
+        productUsageList = list(cursor.execute("""select sum(main_transaction.quantityUsed) as totalUsed,productSku
         from main_transaction inner
         join
         main_product
@@ -137,6 +137,19 @@ def dashboard(request):
         DESC;
     
         """))
+        graphList = list()
+        print(productUsageList)
+        for productUsage in productUsageList:
+            tempList = list()
+            totalQuantityOfProduct = Product.objects.get(productSku=productUsage[1]).quantity
+            percentageUsed = (float(productUsage[0]) / totalQuantityOfProduct) * 100
+            tempList.append(productUsage[1])
+            tempList.append(str(percentageUsed))
+            tempList.append(str(100 - percentageUsed))
+            print(tempList)
+            graphList.append(tempList)
+            graphList.sort(key = lambda x: x[1])
+
     return render(request, "dashboard.html",
                   {"transactions": transactions, "averageProductsUsedLast30Days": averageProductsUsedLast30Days,
                    "productsUsedLast7Days": productsUsedLast7Days, "productsUsedLast30Days": productsUsedLast30Days,

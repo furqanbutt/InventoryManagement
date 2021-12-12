@@ -150,6 +150,16 @@
                     <li class="sidebar-item"><a class="sidebar-link waves-effect waves-dark sidebar-link"
                                                 href="{% url 'products' %}" aria-expanded="false"><i
                             class="mdi mdi-view-list"></i><span class="hide-menu">All Products</span></a></li>
+                    {% if userF.is_authenticated %}
+
+                        <li class="sidebar-item">
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="/logout"><i
+                                    class="mdi mdi-logout"></i><span class="hide-menu">Logout</span></a>
+                        </li>
+                        {#                        <li class="nav-item">#}
+                        {#                            <a class="nav-link" href="#">Welcome, {{ user.username }}</a>#}
+                        {#                        </li>#}
+                    {% endif %}
 
                 </ul>
             </nav>
@@ -176,7 +186,8 @@
 <!--chartis chart-->
 <link rel="stylesheet" href="//cdn.jsdelivr.net/chartist.js/latest/chartist.min.css">
 <script src="//cdn.jsdelivr.net/chartist.js/latest/chartist.min.js"></script>
-<script src="{% static 'dist/js/pages/dashboards/dashboard1.js' %}"></script>
+
+{#<script src="{% static 'dist/js/pages/dashboards/dashboard1.js' %}"></script>#}
 
 </body>
 

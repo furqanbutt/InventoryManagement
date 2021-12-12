@@ -2,95 +2,93 @@
 {% load static %}
 {% block content %}
     <style>
-    .ct-chart .ct-bar {
-    stroke-width: 4vw;
-}
+
     </style>
     <div class="card h-auto">{#   style="height: 92vh !important; background-color: #0d4a79">#}
         <div class="card-body">
             <div class="row">
 
-                <div class="col-lg-3 col-sm-12">
-                    <div class="card border-primary">
-                        <div class="card-body ">
-                            {#                            <h4 class="card-title">Weekly Stats</h4>#}
-                            {#                            <h6 class="card-subtitle">Average sales</h6>#}
-                            <div class=" pb-3 d-flex align-items-center">
-                                {#                                    <span class="btn btn-primary btn-circle d-flex align-items-center">#}
-                                {#                                        <i class="mdi mdi-cart-outline fs-4"></i>#}
-                                {#                                    </span>#}
-                                <div class="ms-3">
-                                    <h5 class="mb-0 fw-bold">Average Products used daily (30 Days)</h5>
-                                    <span class="text-muted fs-4">{{ averageProductsUsedLast30Days }}</span>
-                                </div>
-                                {#                                <div class="ms-auto">#}
-                                {#                                    <span class="badge bg-light text-muted">+68%</span>#}
-                                {#                                </div>#}
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-sm-12">
-                    <div class="card border-primary">
-                        <div class="card-body">
-                            {#                            <h4 class="card-title">Weekly Stats</h4>#}
-                            {#                            <h6 class="card-subtitle">Average sales</h6>#}
-                            <div class="pb-3 d-flex align-items-center">
-                                {#                                    <span class="btn btn-primary btn-circle d-flex align-items-center">#}
-                                {#                                        <i class="mdi mdi-cart-outline fs-4"></i>#}
-                                {#                                    </span>#}
-
-                                <div class="ms-3">
-                                    <h5 class="mb-0 fw-bold">Products Used last 7 Days</h5>
-                                    <span class="text-muted fs-4">{{ productsUsedLast7Days }}</span>
-                                </div>
-                                {#                                <div class="ms-auto">#}
-                                {#                                    <span class="badge bg-light text-muted">+68%</span>#}
-                                {#                                </div>#}
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-sm-12">
-                    <div class="card border-primary">
-                        <div class="card-body">
-                            {#                            <h4 class="card-title">Weekly Stats</h4>#}
-                            {#                            <h6 class="card-subtitle">Average sales</h6>#}
-                            <div class=" pb-3 d-flex align-items-center">
-                                {#                                    <span class="btn btn-primary btn-circle d-flex align-items-center">#}
-                                {#                                        <i class="mdi mdi-cart-outline fs-4"></i>#}
-                                {#                                    </span>#}
-                                <div class="ms-3">
-                                    <h5 class="mb-0 fw-bold">Products used last 30 Days</h5>
-                                    <span class="text-muted fs-4">{{ productsUsedLast30Days }}</span>
-                                </div>
-                                {#                                <div class="ms-auto">#}
-                                {#                                    <span class="badge bg-light text-muted">+68%</span>#}
-                                {#                                </div>#}
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-sm-12">
-                    <div class="card border-primary">
-                        <div class="card-body">
-                            {#                            <h4 class="card-title">Weekly Stats</h4>#}
-                            {#                            <h6 class="card-subtitle">Average sales</h6>#}
-                            <div class="pb-3 d-flex align-items-center">
-                                {#                                    <span class="btn btn-primary btn-circle d-flex align-items-center">#}
-                                {#                                        <i class="mdi mdi-cart-outline fs-4"></i>#}
-                                {#                                    </span>#}
-                                <div class="ms-3">
-                                    <h5 class="mb-0 fw-bold">Total Products Used</h5>
-                                    <span class="text-muted fs-4">{{ totalProductsUsed }}</span>
-                                </div>
-                                {#                                <div class="ms-auto">#}
-                                {#                                    <span class="badge bg-light text-muted">+68%</span>#}
-                                {#                                </div>#}
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                {#                <div class="col-lg-3 col-sm-12">#}
+                {#                    <div class="card border-primary">#}
+                {#                        <div class="card-body ">#}
+                {#                            <h4 class="card-title">Weekly Stats</h4>#}
+                {#                            <h6 class="card-subtitle">Average sales</h6>#}
+                {#                            <div class=" pb-3 d-flex align-items-center">#}
+                {#                                    <span class="btn btn-primary btn-circle d-flex align-items-center">#}
+                {#                                        <i class="mdi mdi-cart-outline fs-4"></i>#}
+                {#                                    </span>#}
+                {#                                <div class="ms-3">#}
+                {#                                    <h5 class="mb-0 fw-bold">Average Products used daily (30 Days)</h5>#}
+                {#                                    <span class="text-muted fs-4">{{ averageProductsUsedLast30Days }}</span>#}
+                {#                                </div>#}
+                {#                                <div class="ms-auto">#}
+                {#                                    <span class="badge bg-light text-muted">+68%</span>#}
+                {#                                </div>#}
+                {#                            </div>#}
+                {#                        </div>#}
+                {#                    </div>#}
+                {#                </div>#}
+                {#                <div class="col-lg-3 col-sm-12">#}
+                {#                    <div class="card border-primary">#}
+                {#                        <div class="card-body">#}
+                {#                            <h4 class="card-title">Weekly Stats</h4>#}
+                {#                            <h6 class="card-subtitle">Average sales</h6>#}
+                {#                            <div class="pb-3 d-flex align-items-center">#}
+                {#                                    <span class="btn btn-primary btn-circle d-flex align-items-center">#}
+                {#                                        <i class="mdi mdi-cart-outline fs-4"></i>#}
+                {#                                    </span>#}
+                {##}
+                {#                                <div class="ms-3">#}
+                {#                                    <h5 class="mb-0 fw-bold">Products Used last 7 Days</h5>#}
+                {#                                    <span class="text-muted fs-4">{{ productsUsedLast7Days }}</span>#}
+                {#                                </div>#}
+                {#                                <div class="ms-auto">#}
+                {#                                    <span class="badge bg-light text-muted">+68%</span>#}
+                {#                                </div>#}
+                {#                            </div>#}
+                {#                        </div>#}
+                {#                    </div>#}
+                {#                </div>#}
+                {#                <div class="col-lg-3 col-sm-12">#}
+                {#                    <div class="card border-primary">#}
+                {#                        <div class="card-body">#}
+                {#                            <h4 class="card-title">Weekly Stats</h4>#}
+                {#                            <h6 class="card-subtitle">Average sales</h6>#}
+                {#                            <div class=" pb-3 d-flex align-items-center">#}
+                {#                                    <span class="btn btn-primary btn-circle d-flex align-items-center">#}
+                {#                                        <i class="mdi mdi-cart-outline fs-4"></i>#}
+                {#                                    </span>#}
+                {#                                <div class="ms-3">#}
+                {#                                    <h5 class="mb-0 fw-bold">Products used last 30 Days</h5>#}
+                {#                                    <span class="text-muted fs-4">{{ productsUsedLast30Days }}</span>#}
+                {#                                </div>#}
+                {#                                <div class="ms-auto">#}
+                {#                                    <span class="badge bg-light text-muted">+68%</span>#}
+                {#                                </div>#}
+                {#                            </div>#}
+                {#                        </div>#}
+                {#                    </div>#}
+                {#                </div>#}
+                {#                <div class="col-lg-3 col-sm-12">#}
+                {#                    <div class="card border-primary">#}
+                {#                        <div class="card-body">#}
+                {#                            <h4 class="card-title">Weekly Stats</h4>#}
+                {#                            <h6 class="card-subtitle">Average sales</h6>#}
+                {#                            <div class="pb-3 d-flex align-items-center">#}
+                {#                                    <span class="btn btn-primary btn-circle d-flex align-items-center">#}
+                {#                                        <i class="mdi mdi-cart-outline fs-4"></i>#}
+                {#                                    </span>#}
+                {#                                <div class="ms-3">#}
+                {#                                    <h5 class="mb-0 fw-bold">Total Products Used</h5>#}
+                {#                                    <span class="text-muted fs-4">{{ totalProductsUsed }}</span>#}
+                {#                                </div>#}
+                {#                                <div class="ms-auto">#}
+                {#                                    <span class="badge bg-light text-muted">+68%</span>#}
+                {#                                </div>#}
+                {#                            </div>#}
+                {#                        </div>#}
+                {#                    </div>#}
+                {#                </div>#}
             </div>
             <div class="row">
                 <div class="col-lg-12">
@@ -112,7 +110,7 @@
                                     </ul>
                                 </div>
                             </div>
-                            <div class="ct-chart "  >
+                            <div class="ct-chart ">
 
                             </div>
                         </div>
@@ -128,6 +126,7 @@
                                     <th>Product SKU</th>
                                     <th>Product Description</th>
                                     <th>Quantity Used</th>
+                                    <th>Type</th>
                                     <th>Date</th>
                                     </thead>
                                     <tbody>
@@ -136,6 +135,7 @@
                                             <td>{{ transaction.product.productSku }}</td>
                                             <td>{{ transaction.product.productDescription }}</td>
                                             <td>{{ transaction.quantityUsed }}</td>
+                                            <td>{{ transaction.type }}</td>
                                             <td>{{ transaction.dateUsed }}</td>
                                             {#                                                <td>#}
                                             {#                                                    <a href="{% url 'editProduct' %}?productId={{ product.productSku }}"><i#}
@@ -154,35 +154,48 @@
             </div>
         </div>
     </div>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/chartist-plugin-tooltip/0.0.11/chartist-plugin-tooltip.min.js"></script>
+
     <script>
         $(document).ready(function () {
             $('#dtBasicExample').DataTable({"bSort": false});
             $('.dataTables_length').addClass('bs-select');
 
-            /*
-    Template Name: Admin Pro Admin
-    Author: Wrappixel
-    Email: niravjoshi87@gmail.com
-    File: js
-    */
             new Chartist.Bar('.ct-chart', {
                 labels: [
                     {% for label in graphList %}
-                        '{{ label.1 }}',
+                        '{{ label.0 }}',
                     {% endfor %}
                 ],
                 series: [
                     [
-                         {% for label in graphList %}
-                        '{{ label.0 }}',
-                    {% endfor %}
+                        {% for label in graphList %}
+                            {meta: 'description', value: '{{ label.1 }}'},
+                        {% endfor %}
+
+
+                    ],
+                    [
+                        {% for label in graphList %}
+                            {meta: 'description', value: '{{ label.2 }}'},
+                        {% endfor %}
                     ]
                 ]
             }, {
-                seriesBarDistance: 1,
-                reverseData: true,
-
-
+                low: 0,
+                {#high: 100,#}
+                stackBars: true,
+                fullWidth: true,
+                horizontalBars: true,
+                {#plugins: [#}
+                {#    Chartist.plugins.tooltip()#}
+                {#]#}
+            }).on('draw', function (data) {
+                if (data.type === 'bar') {
+                    data.element.attr({
+                        style: 'stroke-width: 13px'
+                    });
+                }
             });
         });
 
