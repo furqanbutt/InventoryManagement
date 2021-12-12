@@ -150,7 +150,7 @@
                     <li class="sidebar-item"><a class="sidebar-link waves-effect waves-dark sidebar-link"
                                                 href="{% url 'products' %}" aria-expanded="false"><i
                             class="mdi mdi-view-list"></i><span class="hide-menu">All Products</span></a></li>
-                    {% if userF.is_authenticated %}
+                    {% if user.is_authenticated %}
 
                         <li class="sidebar-item">
                             <a class="sidebar-link waves-effect waves-dark sidebar-link" href="/logout"><i
