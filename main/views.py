@@ -141,7 +141,7 @@ def dashboard(request):
         print(productUsageList)
         for productUsage in productUsageList:
             tempList = list()
-            totalQuantityOfProduct = Product.objects.get(productSku=productUsage[1]).quantity
+            totalQuantityOfProduct = Product.objects.get(productSku=productUsage[1]).first().quantity
             percentageUsed = (float(productUsage[0]) / totalQuantityOfProduct) * 100
             tempList.append(productUsage[1])
             tempList.append(str(percentageUsed))
