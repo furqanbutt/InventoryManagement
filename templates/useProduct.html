@@ -1,7 +1,9 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
-    <script src="https://unpkg.com/html5-qrcode" type="text/javascript"></script>
+    {#    <script src="https://unpkg.com/html5-qrcode" type="text/javascript"></script>#}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://rawgit.com/schmich/instascan-builds/master/instascan.min.js"></script>
     <style>
         .autocomplete-items {
             position: absolute;
@@ -48,7 +50,8 @@
                         <h3 class="card-header ">Update Used Product {{ product.productSku }}</h3>
                         <div class="card-body">
                             <center>
-                                <div id="qr-reader" style="width: 300px"></div>
+                                <h6>QR CODE</h6>
+                                <video style="height: 20vh !important;" id="preview"></video>
                             </center>
                             <div>
                                 <div class="mx-auto mt-2 mb-2">
@@ -59,12 +62,13 @@
                                     {% endif %}
                                     <div class="card">
                                         <div class="card-body">
-                                            <form method="GET" autocomplete="off">
+                                            <form method="GET" autocomplete="off" id="searchSubmitForm">
                                                 <div class="autocomplete">
-                                                    <input autocomplete="off" class="form-control" name="productSku"
+                                                    <input autocomplete="off" class="form-control"
+                                                           name="productSkuAndLocation"
                                                            id="searchInput"
-                                                           value="{{ product.productSku }}"
-                                                           placeholder="Search Product by SKU"/>
+                                                           value="{{ product.productSku }},{{ product.location }}"
+                                                           placeholder="Search Product by SKU,Location"/>
                                                 </div>
                                                 <br>
                                                 <input type="submit" class="btn btn-sm float-end btn-outline-primary"
@@ -118,16 +122,15 @@
     </div>
 
     <script>
-
-        var html5QrcodeScanner = new Html5QrcodeScanner(
-            "qr-reader", {fps: 10, qrbox: 200});
-        html5QrcodeScanner.render(onScanSuccess);
-
-        function onScanSuccess(decodedText, decodedResult) {
-            console.log(`Code scanned = ${decodedText}`, decodedResult);
-            document.getElementById("searchInput").value = decodedText;
-            html5QrcodeScanner.clear();
-        }
+        {##}
+        {#        var html5QrcodeScanner = new Html5QrcodeScanner(#}
+        {#            "qr-reader", {fps: 10, qrbox: 200});#}
+        {#        html5QrcodeScanner.render(onScanSuccess);#}
+        {##}
+        {#        function onScanSuccess(decodedText, decodedResult) {#}
+        {#            console.log(`Code scanned = ${decodedText}`, decodedResult);#}
+        {#            document.getElementById("searchInput").value = decodedText;#}
+        {#            html5QrcodeScanner.clear();}#}
 
 
         function autocomplete(inp, arr) {
@@ -237,5 +240,23 @@
 
         console.log(JSON.parse(dropDownOptions))
         autocomplete(document.getElementById("searchInput"), JSON.parse(dropDownOptions))
+
+        {# SCANNER #}
+        let scanner = new Instascan.Scanner({video: document.getElementById('preview')});
+        scanner.addListener('scan', function (content) {
+            document.getElementById("searchInput").value = content;
+            document.getElementById("searchSubmitForm").submit();
+        });
+
+
+        Instascan.Camera.getCameras().then(function (cameras) {
+            if (cameras.length > 0) {
+                scanner.start(cameras[0]);
+            } else {
+                console.error('No cameras found.');
+            }
+        }).catch(function (e) {
+            console.error(e);
+        })
     </script>
 {% endblock %}

@@ -79,7 +79,9 @@ def useProduct(request):
     print(products)
     if request.POST:
         productSku = request.POST["productSku"]
-        product = Product.objects.get(productSku__iexact=productSku)
+        productLocation = request.POST["location"]
+        product = Product.objects.filter(productSku__iexact=productSku,
+                                         location__iexact=productLocation).first()
         withDrawalQuantity = request.POST["quantity"]
         if int(product.quantity) > int(withDrawalQuantity):
             transaction = Transaction.objects.create(product=product, quantityUsed=withDrawalQuantity)
@@ -95,9 +97,20 @@ def useProduct(request):
                 )
         return redirect("/")
     if request.GET:
-        productSku = request.GET["productSku"]
+        productSkuAndLocation = str(request.GET["productSkuAndLocation"]).split(",")
+        productSku = productSkuAndLocation[0]
+        productLocation = ""
+        if len(productSkuAndLocation) > 1:
+            productLocation = productSkuAndLocation[1]
+
+        print(productSku + "," + productLocation)
+
         try:
-            product = Product.objects.get(productSku__iexact=productSku)
+            if (productLocation):
+                product = Product.objects.filter(productSku__iexact=productSku,
+                                                 location__iexact=productLocation).first()
+            else:
+                product = Product.objects.filter(productSku__iexact=productSku).first()
             return render(request, 'useProduct.html', {"product": product, "products": products})
         except:
             return render(request, 'useProduct.html', {"msg": "Unable to fetch product", "products": products})
@@ -148,7 +161,7 @@ def dashboard(request):
             tempList.append(str(100 - percentageUsed))
             print(tempList)
             graphList.append(tempList)
-            graphList.sort(key = lambda x: x[1])
+            graphList.sort(key=lambda x: x[1])
 
     return render(request, "dashboard.html",
                   {"transactions": transactions, "averageProductsUsedLast30Days": averageProductsUsedLast30Days,
