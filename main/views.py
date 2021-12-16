@@ -105,14 +105,15 @@ def useProduct(request):
 
         print(productSku + "," + productLocation)
 
-        try:
-            if (productLocation):
-                product = Product.objects.filter(productSku__iexact=productSku,
-                                                 location__iexact=productLocation).first()
-            else:
-                product = Product.objects.filter(productSku__iexact=productSku).first()
+        if (productLocation):
+            product = Product.objects.filter(productSku__iexact=productSku,
+                                             location__iexact=productLocation).first()
+        else:
+            product = Product.objects.filter(productSku__iexact=productSku).first()
+
+        if len(products) > 0:
             return render(request, 'useProduct.html', {"product": product, "products": products})
-        except:
+        else:
             return render(request, 'useProduct.html', {"msg": "Unable to fetch product", "products": products})
 
     return render(request, "useProduct.html", {"products": products})
