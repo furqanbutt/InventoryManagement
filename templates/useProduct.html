@@ -49,10 +49,10 @@
                     <div class="card col-lg-6 col-sm-12 m-auto border-primary shadow">
                         <h3 class="card-header ">Update Used Product {{ product.productSku }}</h3>
                         <div class="card-body">
-                            <center>
+                            <center id="QRBody">
                                 <h6>QR CODE</h6>
                                 <video style="height: 20vh !important;" id="preview"></video>
-{#                                <select id="camerasDropdown" class="form-control"></select>#}
+                                {#                                <select id="camerasDropdown" class="form-control"></select>#}
                             </center>
                             <div>
                                 <div class="mx-auto mt-2 mb-2">
@@ -261,6 +261,12 @@
 
             if (cameras.length > 0) {
                 if (cameras.length > 1) {
+                    document.getElementById("QRBODY").innerHTML += '<video style="height: 20vh !important;" id="preview1"></video>'
+                    let scanner = new Instascan.Scanner({video: document.getElementById('preview1')});
+                    scanner.addListener('scan', function (content) {
+                        document.getElementById("searchInput").value = content;
+                        document.getElementById("searchSubmitForm").submit();
+                    });
                     scanner.start(cameras[1]);
                 } else {
                     scanner.start(cameras[0]);
