@@ -52,7 +52,7 @@
                             <center>
                                 <h6>QR CODE</h6>
                                 <video style="height: 20vh !important;" id="preview"></video>
-                                                                <select id="camerasDropdown" class="form-control"></select>
+                                <select id="camerasDropdown" class="form-control"></select>
                             </center>
                             <div>
                                 <div class="mx-auto mt-2 mb-2">
@@ -263,7 +263,7 @@
 
             if (cameras.length > 0) {
                 if (cameras.length > 1) {
-                    scanner.start(cameras[cameras.length-1]);
+                    scanner.start(cameras[cameras.length - 1]);
                 } else {
                     scanner.start(cameras[0]);
                 }
