@@ -52,6 +52,7 @@
                             <center>
                                 <h6>QR CODE</h6>
                                 <video style="height: 20vh !important;" id="preview"></video>
+                                <select id="camerasDropdown" class="form-control"></select>
                             </center>
                             <div>
                                 <div class="mx-auto mt-2 mb-2">
@@ -248,8 +249,16 @@
             document.getElementById("searchSubmitForm").submit();
         });
 
+        dropDownCameras = ""
+
+        function loadCameras(item, index) {
+            dropDownCameras += "<option>" + index + ": " + item + "</option>";
+        }
 
         Instascan.Camera.getCameras().then(function (cameras) {
+            cameras.forEach(loadCameras);
+            document.getElementById("camerasDropdown").innerHTML = dropDownCameras;
+
             if (cameras.length > 0) {
                 if (cameras.length > 1) {
                     scanner.start(cameras[1]);
