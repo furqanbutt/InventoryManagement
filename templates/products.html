@@ -1,6 +1,16 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
+        <style>
+        .image:hover {
+            transform: scale(3.0);
+            transform-origin: left;
+            -moz-transition: all 0.1s;
+            -webkit-transition: all 0.1s;
+            -o-transition: all 0.1s;
+            transition: all 0.1s;
+        }
+    </style>
     <div class="card h-100 h-auto">{#   style="height: 92vh !important; background-color: #0d4a79">#}
         <div class="card-body">
             <div class="row">
@@ -29,7 +39,7 @@
                                     {% for product in products %}
                                         <tr>
                                             <td>
-                                                <img style="width: 13vw;height:13vh;object-fit: contain"
+                                                <img class="image" style="width: 13vw;height:13vh;object-fit: contain"
                                                      src="{{ product.image.url }}"/>
                                             </td>
                                             <td>{{ product.productSku }}</td>

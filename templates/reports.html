@@ -1,6 +1,16 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
+    <style>
+        .image:hover {
+            transform: scale(3.0);
+            transform-origin: left;
+            -moz-transition: all 0.1s;
+            -webkit-transition: all 0.1s;
+            -o-transition: all 0.1s;
+            transition: all 0.1s;
+        }
+    </style>
     <div class="card h-100 h-auto">{#   style="height: 92vh !important; background-color: #0d4a79">#}
         <div class="card-body">
             <div class="row">
@@ -10,7 +20,7 @@
                         <h3 class="card-header ">Product Count Report</h3>
                         <div class="card-body overflow-scroll">
                             <div>
-{#                                <a class="btn btn-outline-primary" href="{% url 'addProduct' %} ">Add Product</a>#}
+                                {#                                <a class="btn btn-outline-primary" href="{% url 'addProduct' %} ">Add Product</a>#}
                                 {#                                <a class="btn btn-outline-dark float-end" href="{% url 'useProduct' %}">Update Used#}
                                 {#                                    Products</a>#}
                                 <br>
@@ -28,7 +38,7 @@
                                     {% for product in products %}
                                         <tr>
                                             <td>
-                                                <img style="width: 13vw;height:13vh;object-fit: contain"
+                                                <img class="image" style="width: 13vw;height:13vh;object-fit: contain"
                                                      src="{% get_media_prefix %}{{ product.1 }}"/>
                                             </td>
                                             <td>{{ product.2 }}</td>
