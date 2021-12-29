@@ -51,8 +51,8 @@
                         <div class="card-body">
                             <center>
                                 <h6>QR CODE</h6>
-                                <video style="height: 20vh !important;" id="preview"></video>
-                                <select id="camerasDropdown" class="form-control"></select>
+                                <video class="border-primary" style="height: 20vh !important;" id="preview"></video>
+{#                                <select id="camerasDropdown" class="form-control"></select>#}
                             </center>
                             <div>
                                 <div class="mx-auto mt-2 mb-2">
@@ -68,7 +68,9 @@
                                                     <input autocomplete="off" class="form-control"
                                                            name="productSkuAndLocation"
                                                            id="searchInput"
+                                                           {% if product %}
                                                            value="{{ product.productSku }},{{ product.location }}"
+                                                           {% endif %}
                                                            placeholder="Search Product by SKU,Location"/>
                                                 </div>
                                                 <br>
@@ -259,7 +261,7 @@
         Instascan.Camera.getCameras().then(function (cameras) {
             camerasList = cameras;
             cameras.forEach(loadCameras);
-            document.getElementById("camerasDropdown").innerHTML = dropDownCameras;
+            {#document.getElementById("camerasDropdown").innerHTML = dropDownCameras;#}
 
             if (cameras.length > 0) {
                 if (cameras.length > 1) {
@@ -274,7 +276,7 @@
             console.error(e);
         })
 
-        document.getElementById("camerasDropdown").onchange = changeListener;
+        {#document.getElementById("camerasDropdown").onchange = changeListener;#}
 
         function changeListener() {
             scanner.stop();

@@ -3,7 +3,7 @@ import datetime
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.forms import AuthenticationForm
 from django.db import connection
-from django.db.models import Sum
+from django.db.models import Sum, Count
 from django.shortcuts import render, redirect
 from django.core.mail import send_mail
 
@@ -33,8 +33,8 @@ def editProduct(request):
     if not request.user.is_superuser:
         return HttpResponseRedirect(reverse("login"))
     if request.POST:
-        productSku = request.POST["productSku"]
-        product = Product.objects.get(productSku=productSku)
+        productId = request.POST["productId"]
+        product = Product.objects.get(id=productId)
         product.productDescription = request.POST["productDescription"]
         product.quantity = request.POST["quantity"]
         product.location = request.POST["location"]
@@ -43,7 +43,7 @@ def editProduct(request):
 
     if request.GET:
         productId = request.GET["productId"]
-        product = Product.objects.get(productSku=productId)
+        product = Product.objects.get(id=productId)
         return render(request, 'editProduct.html', {"product": product})
 
 
@@ -172,8 +172,10 @@ def dashboard(request):
 
 
 def register_request(request):
-    if request.user.is_authenticated:
-        return redirect("/")
+    # if request.user.is_authenticated:
+    #     return redirect("/")
+    if not request.user.is_superuser:
+        return HttpResponseRedirect(reverse("login"))
     if request.method == "POST":
         form = NewUserForm(request.POST)
         if form.is_valid():
@@ -220,3 +222,14 @@ def logout_request(request):
     logout(request)
     # messages.info(request, "You have successfully logged out.")
     return redirect("/")
+
+
+def reports(request):
+    # products = Product.objects.annotate(total=Sum("productSku")).values("productSku", "productDescription",
+    #                                   "dateAdded","total")
+    with connection.cursor() as cursor:
+        products = list(
+            cursor.execute(
+                "select sum(quantity) as total,image,productSku,productDescription,dateAdded from main_product group by main_product.productSku order by dateAdded DESC"))
+        print(products)
+        return render(request, "reports.html", context={"products": products})

@@ -12,6 +12,9 @@
                             <div>
                                 <form method="post">
                                     {% csrf_token %}
+
+                                    <input class="form-control" type="text" name="productId"
+                                           value="{{ product.id }}" hidden/>
                                     <label for="productSku"> Product SKU</label>
                                     <input class="form-control" type="text" name="productSku"
                                            value="{{ product.productSku }}" hidden/>

@@ -13,22 +13,22 @@
                                 <form method="post" enctype="multipart/form-data">
                                     {% csrf_token %}
                                     <label for="productSku"> Product SKU</label>
-                                    <input class="form-control" type="text" name="productSku"/>
+                                    <input class="form-control" type="text" name="productSku" required/>
 
                                     <label for="productDescription">Product Description</label>
-                                    <input class="form-control" type="text" name="productDescription"
+                                    <input class="form-control" type="text" name="productDescription" required
                                     />
 
                                     <label for="quantity">Quantity</label>
-                                    <input class="form-control" type="number" name="quantity"
+                                    <input class="form-control" type="number" name="quantity" required
                                     />
 
                                     <label for="location">Location</label>
-                                    <input class="form-control" type="text" name="location"
+                                    <input class="form-control" type="text" name="location" required
                                     />
 
                                     <label for="image">Product Image</label>
-                                    <input class="form-control" type="file" accept="image/*" name="image"
+                                    <input class="form-control" type="file" accept="image/*" name="image" required
                                     />
 
                                     <br>
