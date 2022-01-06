@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
-        <style>
+    <style>
         .image:hover {
             transform: scale(3.0);
             transform-origin: left;
@@ -50,6 +50,11 @@
                                             <td>
                                                 <a href="{% url 'editProduct' %}?productId={{ product.id }}"><i
                                                         class="font-20 mdi mdi-pencil-box-outline"></i></a>
+                                                <a href="{% url 'deleteProduct' %}?productId={{ product.id }}&productSKU={{ product.productSku }}"><i
+                                                        class="font-20 mdi mdi-delete-forever "
+                                                        style="color:indianred"></i></a>
+
+
                                                 {#                                                <a class="btn btn-sm btn-outline-primary" href="{% url 'useProduct' %}?productId={{ product.productSku }}" >Withdraw</a>#}
                                             </td>
                                         </tr>

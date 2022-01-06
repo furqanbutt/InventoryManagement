@@ -38,6 +38,11 @@ def editProduct(request):
         product.productDescription = request.POST["productDescription"]
         product.quantity = request.POST["quantity"]
         product.location = request.POST["location"]
+        print(request.FILES.get("image"))
+        print(request.POST.get("image"))
+        if len(request.FILES) > 0:
+            print("File is submitted")
+            product.image = request.FILES.get("image")
         product.save()
         return redirect("/")
 
@@ -83,8 +88,9 @@ def useProduct(request):
         product = Product.objects.filter(productSku__iexact=productSku,
                                          location__iexact=productLocation).first()
         withDrawalQuantity = request.POST["quantity"]
+        typeOfUse = request.POST["typeOfUse"]
         if int(product.quantity) > int(withDrawalQuantity):
-            transaction = Transaction.objects.create(product=product, quantityUsed=withDrawalQuantity)
+            transaction = Transaction.objects.create(product=product, quantityUsed=withDrawalQuantity, type=typeOfUse)
             transaction.save()
             product.quantity = str(int(product.quantity) - int(withDrawalQuantity))
             product.save()
@@ -109,7 +115,9 @@ def useProduct(request):
             product = Product.objects.filter(productSku__iexact=productSku,
                                              location__iexact=productLocation).first()
         else:
-            product = Product.objects.filter(productSku__iexact=productSku).first()
+            return render(request, 'useProduct.html',
+                          {"msg": "Location of product missing. Please use the format [SKU,LOCATION]",
+                           "products": products})
 
         if len(products) > 0:
             return render(request, 'useProduct.html', {"product": product, "products": products})
@@ -233,3 +241,29 @@ def reports(request):
                 "select sum(quantity) as total,image,productSku,productDescription,dateAdded from main_product group by main_product.productSku order by dateAdded DESC"))
         print(products)
         return render(request, "reports.html", context={"products": products})
+
+
+def qrGenerator(request):
+    return render(request, "qrGenerator.html")
+
+
+def deleteProduct(request):
+    if not request.user.is_authenticated:
+        print("user not authenticated")
+        return HttpResponseRedirect(reverse("login"))
+    if not request.user.is_superuser:
+        return HttpResponseRedirect(reverse("login"))
+    if request.GET:
+        productId = request.GET["productId"]
+        productSKU = request.GET["productSKU"]
+        product = Product.objects.get(id=productId, productSku=productSKU)
+        if product:
+            product.delete()
+        return HttpResponseRedirect(reverse("products"))
+
+
+def weeklyUsageReport(request):
+    productsUsedLast7Days = \
+        Transaction.objects.filter(dateUsed__gt=datetime.datetime.today() - datetime.timedelta(days=7)).order_by("type")
+    print(productsUsedLast7Days)
+    return render(request, "weeklyUsageReport.html", context={"transactions": productsUsedLast7Days})

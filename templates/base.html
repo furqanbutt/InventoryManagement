@@ -154,7 +154,14 @@
                                 class="mdi mdi-account-plus"></i><span class="hide-menu">Add User</span></a></li>
                         <li class="sidebar-item"><a class="sidebar-link waves-effect waves-dark sidebar-link"
                                                     href="{% url 'reports' %}" aria-expanded="false"><i
-                                class="mdi mdi-view-list"></i><span class="hide-menu">Report</span></a></li>
+                                class="mdi mdi-view-list"></i><span class="hide-menu">StockTake Report</span></a></li>
+                        <li class="sidebar-item"><a class="sidebar-link waves-effect waves-dark sidebar-link"
+                                                    href="{% url 'weeklyUsageReport' %}" aria-expanded="false"><i
+                                class="mdi mdi-view-list"></i><span class="hide-menu">Weekly Usage Report</span></a></li>
+                        <li class="sidebar-item"><a class="sidebar-link waves-effect waves-dark sidebar-link"
+                                                    href="{% url 'qrGenerator' %}" aria-expanded="false"><i
+                                class="mdi mdi-qrcode"></i><span class="hide-menu">QR Generator</span></a></li>
+
                     {% endif %}
 
                     <li class="sidebar-item"><a class="sidebar-link waves-effect waves-dark sidebar-link"

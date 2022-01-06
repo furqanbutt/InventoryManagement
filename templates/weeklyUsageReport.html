@@ -17,7 +17,7 @@
                 <div class="col-lg-12">
 
                     <div class="card col-lg-12 col-sm-12 m-auto">
-                        <h3 class="card-header ">Product Count Report</h3>
+                        <h3 class="card-header ">Usage Report for last 7 days</h3>
                         <div class="card-body overflow-scroll">
                             <div>
                                 {#                                <a class="btn btn-outline-primary" href="{% url 'addProduct' %} ">Add Product</a>#}
@@ -28,25 +28,25 @@
                                 <br>
                                 <table class="table" id="dtBasicExample">
                                     <thead>
-                                    <th>Product Image</th>
                                     <th>Product SKU</th>
                                     <th>Product Description</th>
-                                    <th>Total Count</th>
-                                    {#                                    <th>Date Added</th>#}
-
+                                    <th>Quantity Used</th>
+                                    <th>Type</th>
+                                    <th>Date</th>
                                     </thead>
                                     <tbody>
-                                    {% for product in products %}
+                                    {% for transaction in transactions %}
                                         <tr>
-                                            <td>
-                                                <img class="image" style="width: 13vw;height:13vh;object-fit: contain"
-                                                     src="{% get_media_prefix %}{{ product.1 }}"/>
-                                            </td>
-                                            <td>{{ product.2 }}</td>
-                                            <td>{{ product.3 }}</td>
-                                            <td>{{ product.0 }}</td>
-                                            {#                                            <td>{{ product.4 }}</td>#}
-
+                                            <td>{{ transaction.product.productSku }}</td>
+                                            <td>{{ transaction.product.productDescription }}</td>
+                                            <td>{{ transaction.quantityUsed }}</td>
+                                            <td>{{ transaction.type }}</td>
+                                            <td>{{ transaction.dateUsed }}</td>
+                                            {#                                                <td>#}
+                                            {#                                                    <a href="{% url 'editProduct' %}?productId={{ product.productSku }}"><i#}
+                                            {#                                                            class="font-20 mdi mdi-pencil-box-outline"></i></a>#}
+                                            {#                                                <a class="btn btn-sm btn-outline-primary" href="{% url 'useProduct' %}?productId={{ product.productSku }}" >Withdraw</a>#}
+                                            {#                                                </td>#}
                                         </tr>
                                     {% endfor %}
 

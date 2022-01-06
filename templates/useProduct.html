@@ -52,7 +52,7 @@
                             <center>
                                 <h6>QR CODE</h6>
                                 <video class="border-primary" style="height: 20vh !important;" id="preview"></video>
-{#                                <select id="camerasDropdown" class="form-control"></select>#}
+                                {#                                <select id="camerasDropdown" class="form-control"></select>#}
                             </center>
                             <div>
                                 <div class="mx-auto mt-2 mb-2">
@@ -68,10 +68,11 @@
                                                     <input autocomplete="off" class="form-control"
                                                            name="productSkuAndLocation"
                                                            id="searchInput"
-                                                           {% if product %}
+                                                           pattern="[0-9A-Za-z]+,[0-9A-Za-z]+"
+                                                            {% if product %}
                                                            value="{{ product.productSku }},{{ product.location }}"
-                                                           {% endif %}
-                                                           placeholder="Search Product by SKU,Location"/>
+                                                            {% endif %}
+                                                           placeholder="SKU,Location"/>
                                                 </div>
                                                 <br>
                                                 <input type="submit" class="btn btn-sm float-end btn-outline-primary"
@@ -106,8 +107,15 @@
                                                max="{{ product.quantity }}"/>
 
                                         <label for="typeOfUse">Type</label>
-                                        <input class="form-control" type="text" name="typeOfUse"
-                                               value="Job" readonly/>
+                                        {#                                        <input class="form-control" type="text" name="typeOfUse"#}
+                                        {#                                               value="Job" readonly/>#}
+                                        <select class="form-control" name="typeOfUse">
+                                            <option>Job</option>
+                                            <option>CRF</option>
+                                            <option>Lighting Solutions</option>
+                                            <option>Cat V LED Rollout</option>
+                                            <option>Cat P LED Rollout</option>
+                                        </select>
 
 
                                         <br>
